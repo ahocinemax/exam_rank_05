@@ -1,6 +1,7 @@
 #pragma once
+
 #include <string>
-#include <map>
+#include <iostream>
 
 class ATarget;
 
@@ -8,17 +9,17 @@ class ASpell
 {
     protected:
         std::string _name;
-        std::string _effects;
-    
+        std::string _effect;
+
     public:
-        ASpell(std::string const &name, std::string const &effects);
-        ASpell &operator=(ASpell const &rhs);
-        ASpell(ASpell const &copy);
+        ASpell(const std::string &name, const std::string &effect);
+        ASpell(const ASpell &copy);
+        ASpell &operator=(const ASpell &rhs);
+
+        std::string getName(void) const;
+        std::string getEffects(void) const;
+        void launch(const ATarget &target) const;
+
+        virtual ASpell *clone(void) const = 0;
         virtual ~ASpell();
-
-        std::string const &getName() const;
-        std::string const &getEffects() const;
-
-        virtual ASpell *clone() const = 0;
-        void launch(ATarget const &target) const;
 };
